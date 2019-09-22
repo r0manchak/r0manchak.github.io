@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/simple.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <section>
+      <h2>How to do a code review</h2>
+      <h4 class="fragment fade-up">By Google's Engineering Practices Documentation</h4>
+    </section>
+
+    <section>
+      <h2>The Standard of Code Review</h2>
+      <p class="">
+        <strong>Purpose</strong>: <span class="fragment fade-left">Make sure the overall code health is improving.</span>
+      </p>
+    </section>
+
+    <section>
+      <h2>
+        Balance
+      </h2>
+      <ul>
+        <li class="fragment fade-up">Developers must be able to **make progress** on their tasks.</li>
+        <li class="fragment fade-up">Make sure the overall code health of the codebase is not decreasing over time.</li>
+      </ul>
+    </section>
+
+    <section>
+      <section>
+        <h2>The Senior Principle</h2>
+        <p class="">
+          Reviewers should approve a PR
+        </p>
+        <p class="fragment fade-up">
+          once it definitely <strong>improves</strong> the overall <strong>code health</strong>
+        </p>
+        <p class="fragment fade-up">
+          even if the PR <strong>isn’t perfect</strong>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Nice to have notes</h2>
+        <blockquote class="fragment fade-up">
+          Nit: the presentation may contain some code examples.
+        </blockquote>
+        <p class="fragment fade-up">+ <strong>Mentoring</strong></p>
+      </section>
+
+    </section>
+
+    <section>
+      <h2>Principles</h2>
+    </section>
+
+    <section>
+      <h2>Thank you</h2>
+      <p>More info at <a href="https://epa.ms/code-rev" target="_blank"><b><u>epa.ms/code-rev</u></b></a></p>
+      <p class="stretch">
+        <img class="plain" src="img/code_review/qr.svg" alt="qr">
+      </p>
+    </section>
+
+  </div>
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        transition: 'none',
+        hash: true,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {src: 'plugin/highlight/highlight.js', async: true}
+        ],
+    });
+</script>
+</body>
+</html>
