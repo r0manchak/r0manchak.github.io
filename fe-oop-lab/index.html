@@ -27,383 +27,85 @@
   <div class="slides">
 
     <section>
-      <h2>Welcome</h2>
-      <h4 class="fragment fade-up">To</h4>
-      <h3 class="fragment fade-up">Object Oriented Programming</h3>
-
-      <small class="fragment fade-up">Click <a href="#/31"><u>here</u></a> if you are looking for the code samples.</small>
+      <h2>How to do a code review</h2>
+      <h4 class="fragment fade-up">Based on<br/>Google's Engineering Practices Documentation</h4>
     </section>
 
     <section>
-      <h2>What is OOP?</h2>
-      <h3 class="fragment fade-up">A programming <strong>paradigm</strong> centered around <strong>objects</strong> rather than functions.</h3>
+      <h2>The Standard of Code Review</h2>
+      <p class="">
+        <strong>Purpose</strong>: <span class="fragment fade-left">Make sure the overall code health is improving.</span>
+      </p>
     </section>
 
     <section>
-      <h3>Since 70s here</h3>
-      <h4 class="fragment fade-up">And still relevant!</h4>
-      <iframe class="fragment fade-up" src="https://giphy.com/embed/YMugCc0jF59h9AaPPH" width="480" height="480" frameBorder="0" allowFullScreen></iframe><p>
+      <h2>
+        Balance
+      </h2>
+      <ul>
+        <li class="fragment fade-up">Developers must be able to <strong>make progress</strong> on their tasks.</li>
+        <li class="fragment fade-up">Make sure the overall <strong>code health</strong> of the codebase <strong>is not
+          decreasing</strong> over time.</li>
+      </ul>
     </section>
 
     <section>
-      <h3>Languages</h3>
-      <p class="fragment fade-up">C#</p>
-      <p class="fragment fade-up">Java</p>
-      <p class="fragment fade-up">Ruby</p>
-      <p class="fragment fade-up">Python</p>
-      <p class="fragment fade-up">JavaScript</p>
-      <p class="fragment fade-up">Many more...</p>
+        <h2>The Senior Principle</h2>
+        <p class="fragment fade-up">
+          Reviewers should approve a PR
+        </p>
+        <p class="fragment fade-up">
+          once it definitely <strong>improves</strong> the overall <strong>code health</strong>
+        </p>
+        <p class="fragment fade-up">
+          even if the PR <strong>isn’t perfect</strong>.
+        </p>
     </section>
 
     <section>
-      <h3>With OOP in Mind</h3>
-      <p class="fragment fade-up">Typescript</p>
-      <p class="fragment fade-up">Angular</p>
-      <p class="fragment fade-in-then-out">React</p>
-      <p class="fragment fade-up">Many frameworks</p>
-    </section>
-
-    <section>
-      <h3>An essential skill for every developer.</h3>
-      <p class="fragment fade-up">Technical Interview</p>
-    </section>
-
-    <section>
-      <h3>Learn and understand OOP</h3>
-    </section>
-
-    <section>
-      <h3>4 Pillars</h3>
-      <p class="fragment fade-up">Encapsulation</p>
-      <p class="fragment fade-up">Abstraction</p>
-      <p class="fragment fade-up">Inheritance</p>
-      <p class="fragment fade-up">Polymorphism</p>
-    </section>
-
-    <section>
-      <h3>Procedural Programming</h3>
-      <p class="fragment fade-up">Functions</p>
-      <p class="fragment fade-up">Data</p>
-      <p class="fragment fade-up">State</p>
-    </section>
-
-    <section data-background="img/spaghetti.jpg"></section>
-
-    <section>Object Oriented Programming</section>
-
-    <section>
-      <img src="img/proc-oop.png" alt="">
-    </section>
-
-    <section>
-      <table>
-        <thead>
-        <tr>
-          <th>Car</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="fragment fade-up">
-          <td>
-            <p>make</p>
-            <p>model</p>
-            <p>year</p>
-          </td>
-        </tr>
-        <tr class="fragment fade-up">
-          <td>
-            <p>start()</p>
-            <p>stop()</p>
-            <p>beep()</p>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h3>Real Programming Example</h3>
-      <p class="fragment fade-up"><img src="img/localstorage.png" alt=""></p>
-    </section>
-
-    <section>
-      <h3 class="fragment fade-down">Encapsulation</h3>
-      <img src="img/Encapsulation.png" alt="">
-    </section>
-
-    <section>
-      <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-const base = 1000;
-const overtime = 10;
-const rate = 20;
-
-function getWage(base, overtime, rate) {
-    return base + overtime * rate;
-}
-      </code></pre>
-
-      <pre class="fragment fade-up"><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-const employee  = {
-    base: 1000,
-    overtime: 10,
-    rate: 20,
-    getWage: function() {
-        return this.base + (this.overtime * this.rate);
-    }
-}
-
-employee.getWage();
-      </code></pre>
-    </section>
-
-    <section>
-      <blockquote>
-        The best functions have as few arguments as possible.
+      <h2>Nice to have notes</h2>
+      <blockquote class="fragment fade-up">
+        Nit: the presentation may contain some code examples.
       </blockquote>
+      <p class="fragment fade-up">+ <strong>Mentoring</strong></p>
     </section>
 
     <section>
-      <h2>Abstraction</h2>
-      <p class="fragment fade-up">
-        <img src="img/dvd.jpg" alt="">
-      </p>
+      <h2>Principles</h2>
+      <ul>
+        <li class="fragment fade-up"><strong>Technical facts</strong> and <strong>data</strong> OVERRULE <strong>opinions</strong> and <strong>personal preferences</strong>.</li>
+        <li class="fragment fade-up">The <strong>style guide</strong> is the <strong>absolute authority</strong>.</li>
+        <li class="fragment fade-up">Aspects of <strong>software design</strong> are almost <strong>never</strong> a pure
+          <strong>style issue</strong> or a <strong>personal preference</strong>.</li>
+        <li class="fragment fade-up"><strong>Consistent</strong> with what is in the <strong>current codebase</strong>.</li>
+      </ul>
     </section>
 
     <section>
-      <h2>Abstraction</h2>
-      <p class="fragment fade-up">Simpler Interface</p>
-      <p class="fragment fade-up">Less Impact of Change</p>
-    </section>
-
-    <section>
-      <h2>Inheritance</h2>
-      <p class="fragment fade-up">
-        Allows to eliminate the redundant code.
-      </p>
-    </section>
-
-    <section>
-      <table class="fragment">
-        <thead>
-        <tr>
-          <th>HTMLElement</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="fragment fade-up">
-          <td>
-            <p>hidden</p>
-            <p>innerHTML</p>
-          </td>
-        </tr>
-        <tr class="fragment fade-up">
-          <td>
-            <p>click()</p>
-            <p>focus()</p>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <tbody>
-          <tr>
-            <td>TextBox</td>
-            <td>Select</td>
-            <td>CheckBox</td>
-          </tr>
-        </tbody>
-      </table>
-
-    </section>
-
-    <section>
-      <h2>Polymorphism</h2>
-      <table class="fragment fade-up">
-        <tbody>
-        <tr>
-          <td>Many</td>
-          <td>Forms</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      Eliminate ugly if-else and switch statements.
-    </section>
-
-    <section>
-
-      <section>
-        <table>
-          <thead>
-          <tr>
-            <th>HTMLElement</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <p>hidden</p>
-              <p>innerHTML</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>click()</p>
-              <p>focus()</p>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-          </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-              <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-                switch(...) {
-                  case 'select': renderSelect();
-                  case 'text': renderText();
-                  case ...
-                  case ...
-                  case ...
-                }
-      </code></pre>
-      </section>
-    </section>
-
-    <section>
-
-      <section>
-        <table>
-          <tbody>
-          <tr>
-            <td>TextBox</td>
-            <td>Select</td>
-            <td>CheckBox</td>
-          </tr>
-          <tr class="fragment fade-up">
-            <td>render()</td>
-            <td>render()</td>
-            <td>render()</td>
-          </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-        <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-          element.render();
-      </code></pre>
-      </section>
-
-    </section>
-
-    <section>
-      <h2>Benefits of OOP</h2>
-      <table>
-        <tbody>
-        <tr class="fragment fade-right">
-          <td>Encapsulation</td>
-          <td class="fragment fade-left">Reduce complexity + Increase reusability</td>
-        </tr>
-        <tr class="fragment fade-right">
-          <td>Abstraction</td>
-          <td class="fragment fade-left">Reduce complexity + Isolate changes impact</td>
-        </tr>
-        <tr class="fragment fade-right">
-          <td>Inheritance</td>
-          <td class="fragment fade-left">Eliminate redundant code</td>
-        </tr>
-        <tr class="fragment fade-right">
-          <td>Polymorphism</td>
-          <td class="fragment fade-left">Refactor ugly switch-case's</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>Objects</h2>
-      <p class="fragment fade-up">Creating Objects</p>
-      <!-- todo: Add -->
-    </section>
-
-    <section>
-      <h2>Object Literals</h2>
-        <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-          const circle = {
-            radius: 1,
-            location: {
-              x: 1,
-              y: 1
-            },
-            draw: function() {
-              console.log('draw', this.location);
-            }
-          }
-      </code></pre>
-    </section>
-
-    <section>
-      <h2>Factories</h2>
-        <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-function createCircle(radius) {
-    return {
-        radius,
-        draw: function () {
-            console.log('draw')
-        }
-    };
-}
-
-const circle = createCircle(1);
-      </code></pre>
-    </section>
-
-    <section>
-      <h2>Constructors</h2>
-      <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-function Circle(radius) {
-    this.radius = radius;
-    this.draw = function () {
-        console.log('draw');
-    }
-}
-
-const anotherCircle = new Circle(1);
-      </code></pre>
-      <blockquote class="fragment fade-up">This is the reference to the object which is executing the piece of code.</blockquote>
-    </section>
-
-    <section>
-      <p>Every JavaScript object has a constructor property.</p>
-      <p class="fragment fade-up">
-        <img src="img/constructor.png" alt="">
-      </p>
-      <table class="fragment fade-up">
-      <tbody>
-      <tr>
-        <td>String()</td>
-        <td>Boolean()</td>
-        <td>Number()</td>
-      </tr>
-      </tbody>
-    </table>
-    </section>
-
-    <section>
-      <p>Code samples used during the lecture may be found <a href="https://stackblitz.com/edit/js-oopstupidexample"><u>here</u></a>.</p>
+      <h2>What to look for?</h2>
+      <ul>
+        <li class="fragment fade-up">Architecture design</li>
+        <li class="fragment fade-up">Functionality</li>
+        <li class="fragment fade-up">Complexity
+          <ul>
+            <li class="fragment fade-up">Over-engineering</li>
+          </ul>
+        </li>
+        <li class="fragment fade-up">Tests</li>
+        <li class="fragment fade-up">Naming</li>
+        <li class="fragment fade-up">Comments</li>
+        <li class="fragment fade-up">Style</li>
+        <li class="fragment fade-up">Every line</li>
+        <li class="fragment fade-up">Good Things 🤗</li>
+      </ul>
     </section>
 
     <section>
       <h2>Thank you</h2>
+      <p>More info at <a href="https://epa.ms/code-rev" target="_blank"><b><u>epa.ms/code-rev</u></b></a></p>
+      <p class="stretch">
+        <img class="plain" src="img/code_review/qr.svg" alt="qr">
+      </p>
     </section>
 
   </div>

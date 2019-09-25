@@ -1,0 +1,430 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/simple.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <section>
+      <h2>Welcome</h2>
+      <h4 class="fragment fade-up">To</h4>
+      <h3 class="fragment fade-up">Object Oriented Programming</h3>
+
+      <small class="fragment fade-up">Click <a href="#/31"><u>here</u></a> if you are looking for the code samples.</small>
+    </section>
+
+    <section>
+      <h2>What is OOP?</h2>
+      <h3 class="fragment fade-up">A programming <strong>paradigm</strong> centered around <strong>objects</strong> rather than functions.</h3>
+    </section>
+
+    <section>
+      <h3>Since 70s here</h3>
+      <h4 class="fragment fade-up">And still relevant!</h4>
+      <iframe class="fragment fade-up" src="https://giphy.com/embed/YMugCc0jF59h9AaPPH" width="480" height="480" frameBorder="0" allowFullScreen></iframe><p>
+    </section>
+
+    <section>
+      <h3>Languages</h3>
+      <p class="fragment fade-up">C#</p>
+      <p class="fragment fade-up">Java</p>
+      <p class="fragment fade-up">Ruby</p>
+      <p class="fragment fade-up">Python</p>
+      <p class="fragment fade-up">JavaScript</p>
+      <p class="fragment fade-up">Many more...</p>
+    </section>
+
+    <section>
+      <h3>With OOP in Mind</h3>
+      <p class="fragment fade-up">Typescript</p>
+      <p class="fragment fade-up">Angular</p>
+      <p class="fragment fade-in-then-out">React</p>
+      <p class="fragment fade-up">Many frameworks</p>
+    </section>
+
+    <section>
+      <h3>An essential skill for every developer.</h3>
+      <p class="fragment fade-up">Technical Interview</p>
+    </section>
+
+    <section>
+      <h3>Learn and understand OOP</h3>
+    </section>
+
+    <section>
+      <h3>4 Pillars</h3>
+      <p class="fragment fade-up">Encapsulation</p>
+      <p class="fragment fade-up">Abstraction</p>
+      <p class="fragment fade-up">Inheritance</p>
+      <p class="fragment fade-up">Polymorphism</p>
+    </section>
+
+    <section>
+      <h3>Procedural Programming</h3>
+      <p class="fragment fade-up">Functions</p>
+      <p class="fragment fade-up">Data</p>
+      <p class="fragment fade-up">State</p>
+    </section>
+
+    <section data-background="img/spaghetti.jpg"></section>
+
+    <section>Object Oriented Programming</section>
+
+    <section>
+      <img src="img/proc-oop.png" alt="">
+    </section>
+
+    <section>
+      <table>
+        <thead>
+        <tr>
+          <th>Car</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="fragment fade-up">
+          <td>
+            <p>make</p>
+            <p>model</p>
+            <p>year</p>
+          </td>
+        </tr>
+        <tr class="fragment fade-up">
+          <td>
+            <p>start()</p>
+            <p>stop()</p>
+            <p>beep()</p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3>Real Programming Example</h3>
+      <p class="fragment fade-up"><img src="img/localstorage.png" alt=""></p>
+    </section>
+
+    <section>
+      <h3 class="fragment fade-down">Encapsulation</h3>
+      <img src="img/Encapsulation.png" alt="">
+    </section>
+
+    <section>
+      <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+const base = 1000;
+const overtime = 10;
+const rate = 20;
+
+function getWage(base, overtime, rate) {
+    return base + overtime * rate;
+}
+      </code></pre>
+
+      <pre class="fragment fade-up"><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+const employee  = {
+    base: 1000,
+    overtime: 10,
+    rate: 20,
+    getWage: function() {
+        return this.base + (this.overtime * this.rate);
+    }
+}
+
+employee.getWage();
+      </code></pre>
+    </section>
+
+    <section>
+      <blockquote>
+        The best functions have as few arguments as possible.
+      </blockquote>
+    </section>
+
+    <section>
+      <h2>Abstraction</h2>
+      <p class="fragment fade-up">
+        <img src="img/dvd.jpg" alt="">
+      </p>
+    </section>
+
+    <section>
+      <h2>Abstraction</h2>
+      <p class="fragment fade-up">Simpler Interface</p>
+      <p class="fragment fade-up">Less Impact of Change</p>
+    </section>
+
+    <section>
+      <h2>Inheritance</h2>
+      <p class="fragment fade-up">
+        Allows to eliminate the redundant code.
+      </p>
+    </section>
+
+    <section>
+      <table class="fragment">
+        <thead>
+        <tr>
+          <th>HTMLElement</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="fragment fade-up">
+          <td>
+            <p>hidden</p>
+            <p>innerHTML</p>
+          </td>
+        </tr>
+        <tr class="fragment fade-up">
+          <td>
+            <p>click()</p>
+            <p>focus()</p>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr>
+            <td>TextBox</td>
+            <td>Select</td>
+            <td>CheckBox</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section>
+      <h2>Polymorphism</h2>
+      <table class="fragment fade-up">
+        <tbody>
+        <tr>
+          <td>Many</td>
+          <td>Forms</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      Eliminate ugly if-else and switch statements.
+    </section>
+
+    <section>
+
+      <section>
+        <table>
+          <thead>
+          <tr>
+            <th>HTMLElement</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <p>hidden</p>
+              <p>innerHTML</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>click()</p>
+              <p>focus()</p>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+              <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+                switch(...) {
+                  case 'select': renderSelect();
+                  case 'text': renderText();
+                  case ...
+                  case ...
+                  case ...
+                }
+      </code></pre>
+      </section>
+    </section>
+
+    <section>
+
+      <section>
+        <table>
+          <tbody>
+          <tr>
+            <td>TextBox</td>
+            <td>Select</td>
+            <td>CheckBox</td>
+          </tr>
+          <tr class="fragment fade-up">
+            <td>render()</td>
+            <td>render()</td>
+            <td>render()</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+          element.render();
+      </code></pre>
+      </section>
+
+    </section>
+
+    <section>
+      <h2>Benefits of OOP</h2>
+      <table>
+        <tbody>
+        <tr class="fragment fade-right">
+          <td>Encapsulation</td>
+          <td class="fragment fade-left">Reduce complexity + Increase reusability</td>
+        </tr>
+        <tr class="fragment fade-right">
+          <td>Abstraction</td>
+          <td class="fragment fade-left">Reduce complexity + Isolate changes impact</td>
+        </tr>
+        <tr class="fragment fade-right">
+          <td>Inheritance</td>
+          <td class="fragment fade-left">Eliminate redundant code</td>
+        </tr>
+        <tr class="fragment fade-right">
+          <td>Polymorphism</td>
+          <td class="fragment fade-left">Refactor ugly switch-case's</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Objects</h2>
+      <p class="fragment fade-up">Creating Objects</p>
+      <!-- todo: Add -->
+    </section>
+
+    <section>
+      <h2>Object Literals</h2>
+        <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+          const circle = {
+            radius: 1,
+            location: {
+              x: 1,
+              y: 1
+            },
+            draw: function() {
+              console.log('draw', this.location);
+            }
+          }
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>Factories</h2>
+        <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+function createCircle(radius) {
+    return {
+        radius,
+        draw: function () {
+            console.log('draw')
+        }
+    };
+}
+
+const circle = createCircle(1);
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>Constructors</h2>
+      <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function () {
+        console.log('draw');
+    }
+}
+
+const anotherCircle = new Circle(1);
+      </code></pre>
+      <blockquote class="fragment fade-up">This is the reference to the object which is executing the piece of code.</blockquote>
+    </section>
+
+    <section>
+      <p>Every JavaScript object has a constructor property.</p>
+      <p class="fragment fade-up">
+        <img src="img/constructor.png" alt="">
+      </p>
+      <table class="fragment fade-up">
+      <tbody>
+      <tr>
+        <td>String()</td>
+        <td>Boolean()</td>
+        <td>Number()</td>
+      </tr>
+      </tbody>
+    </table>
+    </section>
+
+    <section>
+      <p>Code samples used during the lecture may be found <a href="https://stackblitz.com/edit/js-oopstupidexample"><u>here</u></a>.</p>
+    </section>
+
+    <section>
+      <h2>Thank you</h2>
+    </section>
+
+  </div>
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        transition: 'none',
+        hash: true,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {src: 'plugin/highlight/highlight.js', async: true}
+        ],
+    });
+</script>
+</body>
+</html>
