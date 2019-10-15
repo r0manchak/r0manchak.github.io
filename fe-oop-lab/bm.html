@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Burning Man</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/simple.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <section>
+      <p class="stretch">
+        <img class="plain" src="https://i.redd.it/hjk0lebko6l31.jpg" alt="bm">
+      </p>
+    </section>
+
+    <section data-state="video">
+      <h2>Principles</h2>
+      <ul>
+        <li>
+          radical inclusion
+        </li>
+        <li>gifting</li>
+        <li>decommodification</li>
+        <li>radical self-reliance</li>
+        <li>radical self-expression</li>
+        <li>immediacy</li>
+        <li>...</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Who comes?</h2>
+      <ul>
+        <li> Dustin Moskovitz (co-founder of Asana and Facebook)</li>
+        <li>The Winklevoss twins</li>
+        <li>Katy Perry</li>
+        <li>Larry Page & Sergey Brin</li>
+        <li>Eric Schmidt </li>
+        <li>Elon Musk</li>
+        <li>Paris Hilton </li>
+        <li>Will Smith </li>
+        <li>Mark Zuckerberg </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How to get there?</h2>
+      <p class="stretch">
+        <img class="plain fragment fade-up" src="https://dataart.ua/media/2863976/image012.gif" alt="bm">
+      </p>
+    </section>
+
+    <section>
+      <h2>Thank you</h2>
+    </section>
+
+  </div>
+
+  <div style="position: absolute; right: 0; bottom: 0; opacity: 0;" id="vidd">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Nn7KrllYlks?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        transition: 'none',
+        hash: true,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {src: 'plugin/highlight/highlight.js', async: true}
+        ],
+    });
+
+    Reveal.addEventListener( 'video', function() {
+        document.getElementById('vidd').style.opacity = 1;
+    } );
+</script>
+</body>
+</html>
