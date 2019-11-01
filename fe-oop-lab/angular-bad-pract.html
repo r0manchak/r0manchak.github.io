@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>Angular. The worst practice</title>
+  <title>Angular. The worst practices</title>
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/reveal.css">
@@ -12,6 +12,8 @@
 
   <!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="lib/css/monokai.css">
+
+  <link rel="stylesheet" href="css/angular-bad-pract.css">
 
   <!-- Printing and PDF exports -->
   <script>
@@ -26,67 +28,649 @@
 <div class="reveal">
   <div class="slides">
 
-    <section>
-      <h2>Angular. The Worst Practices</h2>
-      <h4>Some of the most interesting mistakes.</h4>
-    </section>
+    <!--Intro-->
+<!--    <section>-->
+
+      <section>
+        <h1>Angular</h1>
+        <h2>The Worst Practices</h2>
+        <img class="plain" src="img/angular_bad_pract/ang-black.png" alt="">
+      </section>
+
+      <section>
+        <h3>Juan Herrera</h3>
+        <h4>@jdjuan</h4>
+        <p class="stretch"><img class="plain" src="img/angular_bad_pract/huan.jpg" alt="huan"></p>
+        <p>Google Developer Expert in <b>Angular</b> and <b>WebTechnologies</b></p>
+      </section>
+
+      <section>
+        <h3>Andrii Romanchak</h3>
+        <p class="stretch">
+          <img class="plain" src="img/angular_bad_pract/my_photo.jpg" alt="my photo">
+        </p>
+        <table class="fragment fade-up">
+          <tr>
+            <td><img height="100%" class="plain" src="img/angular_bad_pract/Angular_full_color_logo.svg" alt="angular"></td>
+            <td><ul>
+              <li class="fragment fade-up">Team: > 50 developers</li>
+              <li class="fragment fade-up">Application: 10+ projects - 1 repo</li>
+            </ul></td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h3>My Previous Projects</h3>
+        <ul>
+          <li class="fragment fade-up">Payment System Cabinet</li>
+          <li class="fragment fade-up">Medical Portal for surgery organizations and their clients</li>
+          <li class="fragment fade-up">4K Touch Dashboard for more than 100 factories worldwide</li>
+          <li class="fragment fade-up">A few smaller ones</li>
+        </ul>
+      </section>
+
+<!--    </section>-->
+
+    <!--Problem-->
+<!--    <section>-->
+
+      <section>
+        <h2>Problem</h2>
+        <p class="stretch">
+          <img class="plain fragment fade-up" src="img/angular_bad_pract/blindssuck.gif" alt="blinds gif">
+        </p>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript data-trim has-highlights">
+http.get('/api/authors').subscribe(authors =>
+  http.get(`/api/books?author=${authors[0].id}`).subscribe(books =>
+    this.books = books
+));
+        </code></pre>
+
+        <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
+import { CoreModule } from '../../../../core.module';
+import { FeatureModule } from '../../../../feature.module';
+import { MaterialModule } from '../../../../material.module';
+        </code></pre>
+
+        <img class="plain fragment fade-up" src="img/angular_bad_pract/asian-bad.gif" alt="asian bad">
+      </section>
+
+      <section>
+        <h2>Code Smells</h2>
+        <p class="fragment fade-up"> <u>Symptoms of poor system design or implementation choices</u></p>
+        <div class="fragment fade-up">
+          <b>Cold</b>
+          <p class="fragment fade-left"><- Poor Immune System</p>
+          <p class="fragment fade-left"><- No Vegetables</p>
+          <p class="fragment fade-left"><- Always in hurry</p>
+          <p class="fragment fade-left"><- Poor Time management</p>
+        </div>
+      </section>
+
+<!--    </section>-->
+
+    <!--10: imports (starting)-->
+<!--    <section>-->
+
+      <section>
+        <h2> Can you find</h2>
+        <h2>THE <b>UNDERLYING</b> PROBLEM?</h2>
+      </section>
+
+      <section>
+        <h3>Something is wrong...</h3>
+        <pre><code class="hljs typescript data-trim has-highlights">
+import { CoreModule } from '../../../../core.module';
+import { FeatureModule } from '../../../../feature.module';
+import { MaterialModule } from '../../../../material.module';
+        </code></pre>
+        <p>
+          <img class="plain" src="img/angular_bad_pract/giphy.gif" alt="girl">
+        </p>
+      </section>
+
+      <section>
+        <h2>Vote!</h2>
+        <p>
+          <img src="img/angular_bad_pract/palm.png" alt="palm">
+          <span style="display: inline-block; width: 20%"></span>
+          <img src="img/angular_bad_pract/fist.png" alt="fist">
+        </p>
+      </section>
+
+      <section>
+        <h2>Test Run</h2>
+        <p>
+          <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+          I prefer dogs
+        </p>
+        <p>
+          <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+          I prefer cats
+        </p>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript data-trim has-highlights">
+import { CoreModule } from '../../../../core.module';
+import { FeatureModule } from '../../../../feature.module';
+import { MaterialModule } from '../../../../material.module';
+        </code></pre>
+
+        <div class="fragment fade-up vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor TypeScript configuration
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor folder structure
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h3>tsconfig.json</h3>
+        <pre><code class="hljs json data-trim">
+{
+    "compilerOptions": {
+        "outDir": "./dist/out-tsc",
+        "baseUrl": "src",
+        "paths": {
+          "@core/*": ["app/core/*"],
+          "@feature/*": ["app/modules/feature/*"]
+        }
+    }
+}
+        </code></pre>
+      </section>
+
+      <section>
+        <h3>Looks better</h3>
+        <pre><code class="hljs typescript data-trim has-highlights">
+import { CoreModule } from '@core/core.module';
+import { FeatureModule } from '@feature/feature.module';
+import { MaterialModule } from '@material/material.module';
+        </code></pre>
+        <p>
+          <img class="plain" src="img/angular_bad_pract/good.gif" alt="girl">
+        </p>
+      </section>
+
+<!--    </section>-->
+
+    <!--9: == -->
+<!--    <section>-->
+
+      <section>
+        <h1>#9</h1>
+      </section>
+
+      <section>
+               <pre><code class="hljs typescript data-trim has-highlights">
+if (isAdmin == true) {
+
+}
+        </code></pre>
+
+        <img style="position: absolute; top: 0; right: 0;" class="fragment fade-up" src="img/angular_bad_pract/bad-panda.gif" alt="panda">
+
+        <div class="fragment fade-up vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor JS Knowledge
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor Linter Config
+          </p>
+        </div>
+      </section>
+
+      <section>
+                      <pre><code class="hljs typescript data-trim has-highlights">
+if (isAdmin) {
+
+}
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/good-asian-car.gif" alt="asian good">
+
+      </section>
+
+<!--    </section>-->
+
+    <!--8: @ViewChild()-->
+<!--    <section>-->
+
+      <section>
+        <h1>#8</h1>
+      </section>
+
+      <section>
+        <pre><code class="hljs plaintext data-trim ">
+// template
+&lt;app-loader #loader>
+  &lt;button (click)="loadData()">Load data&lt;/button>
+&lt;/app-loader>
+
+// code
+//...
+@ViewChild('loader') loader: LoaderComponent;
+//...
+public loadData() {
+  this.loader.toogleLoader();
+  //...
+}
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/spiderman-facepalm.gif" alt="bad">
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor Angular API Principles Knowledge
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor Encapsulation Understanding
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript data-trim has-highlights">
+// template
+&lt;app-loader [isLoading]="isLoaderShown">
+  &lt;button (click)="loadData()">Load data&lt;/button>
+&lt;/app-loader>
+
+// code
+//...
+public isLoaderShown: boolean = false;
+//...
+public loadData() {
+  this.isLoaderShown = true;
+  //...
+}
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/spiderman_good.gif" alt="spiderman good">
+      </section>
+
+<!--    </section>-->
+
+    <!--7: ViewEncapsulation.None-->
+<!--    <section>-->
+
+      <section>
+        <h1>#7</h1>
+      </section>
+
+      <section>
+        <pre><code class="hljs plaintext data-trim ">
+@Component({
+  selector: "app-course-list",
+  templateUrl: "./course-list.component.html",
+  styleUrls: ["./course-list.component.css"],
+  encapsulation: ViewEncapsulation.None
+})
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/thinking_2.gif" alt="thinking">
+
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor CSS Style Structure
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor Understanding of ViewEncapsulation
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs sass data-trim has-highlights">
+.login-dialog {
+  ::ng-deep {
+    .dialog-header {
+      font-size: 14px;
+    }
+  }
+}
+        </code></pre>
+
+        <img height="300" class="fragment fade-up" src="img/angular_bad_pract/cat-box-slide.gif" alt="cat box slide">
+
+      </section>
+
+      <section>
+        <pre><code class="hljs html data-trim has-highlights">
+<app-dialog size="small" color="dark"></app-dialog>
+        </code></pre>
+      </section>
+
+<!--    </section>-->
+
+    <!--6: [prop]="'string'"-->
+<!--    <section>-->
+
+      <section>
+        <h1>#6</h1>
+      </section>
+
+      <section>
+        <pre><code class="hljs plaintext data-trim ">
+<app-user-card [user]="'Andrii Romanchak'"></app-user-card>
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/cat_wrong.gif" alt="cat wrong">
+
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor HTML linter
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor ChangeDetection Understanding
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs html data-trim has-highlights">
+<app-user-card user="Andrii Romanchak"></app-user-card>
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/cat-sounds-good.gif" alt="cat good">
+
+      </section>
+
+<!--    </section>-->
+
+    <!--5: subscribe inside-->
+<!--    <section>-->
+
+      <section>
+        <h1>#5</h1>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript data-trim has-highlights">
+http.get('/api/authors').subscribe(authors =>
+  http.get(`/api/books?author=${authors[0].id}`).subscribe(books =>
+    this.books = books
+));
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/thinking_3.gif" alt="thinking">
+
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor RxJS operators knowledge
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor Extensibility
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript has-highlights">
+http.get('/api/authors').pipe(
+  switchMap(authors => http.get(`/api/books?author=${authors[0].id}`)
+)
+  .subscribe(books => {
+    this.books = books;
+  });
+        </code></pre>
+
+        <img height="180" class="fragment fade-up" src="img/angular_bad_pract/exc.gif" alt="cat wrong">
+
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript has-highlights">
+this.books$ = http.get('/api/authors').pipe(
+  switchMap(authors => http.get(`/api/books?author=${authors[0].id}`)
+);
+// template
+<app-book-list [books]="books$ | async"></app-book-list>
+        </code></pre>
+      </section>
+
+<!--    </section>-->
+
+    <!--*4: return shareReplay-->
+<!--    <section>-->
+
+      <section>
+        <h1>#4</h1>
+      </section>
+
+      <section>
+                <pre><code class="hljs typescript data-trim has-highlights">
+    private getConfig() {
+        return this.http.get('/config').pipe(
+            shareReplay(1)
+        );
+    }
+
+    public getNews() {
+        return this.getConfig().pipe(
+            switchMap(config => this.http.get('/news'))
+        )
+    }
+        </code></pre>
+
+        <img height="300" class="fragment fade-up" src="img/angular_bad_pract/pipe.gif" alt="pipe">
+
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Lack of JS understanding
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor RxJS operators knowledge
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript has-highlights">
+    private config$: Config = this.http.get('/config').pipe(
+        shareReplay(1)
+    );
+
+    public getNews() {
+        return this.config$.pipe(
+            switchMap(config => this.http.get('/news'))
+        )
+    }
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/good-3.gif" alt="good">
+      </section>
+
+<!--    </section>-->
+
+    <!--*3: OnPush, Pipe-->
+<!--    <section>-->
+
+      <section>
+        <h1>#3</h1>
+      </section>
+
+      <section>
+                <pre><code class="hljs typescript data-trim has-highlights">
+// template
+&lt;span class="user-name">{{user.name}} &lt;/span>
+&lt;img [src]="createUrl(user.avatar)" [alt]="user.name">
+//...
+public createUrl(avatar) {
+    return `img/${avatar}`;
+}
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/naked-gun-facepalm.gif" alt="bad">
+
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Lack of ChangeDetection knowledge
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Lack of HTML linting
+          </p>
+        </div>
+      </section>
+
+      <section>
+
+        <pre class="fragment fade-down"><code class="hljs typescript has-highlights">
+//...
+changeDetection: ChangeDetectionStrategy.OnPush;
+//...
+        </code></pre>
+
+        <pre><code class="hljs typescript has-highlights">
+// template
+&lt;span class="user-name">{{user.name}}&lt;/span>
+&lt;img [src]="user.avatar | avatarUrl" [alt]="user.name">
+
+
+@Pipe({name: 'avatarUrl'})
+export class RepeatPipe implements PipeTransform {
+    transform(avatar) {
+        return `img/${avatar}`;
+    }
+}
+        </code></pre>
+
+        <img class="fragment fade-up" style="position: absolute; bottom: 0; right: 0;" src="img/angular_bad_pract/good-2.gif" alt="good">
+      </section>
+
+<!--    </section>-->
+
+    <!--*2: Typings-->
+<!--    <section>-->
+
+      <section>
+        <h1>#2</h1>
+      </section>
+
+      <section>
+<!--        <h2>Typing</h2>-->
+        <pre><code class="hljs typescript has-highlights">
+          function square(n) {
+            return n * n;
+          }
+        </code></pre>
+
+        <img class="fragment fade-up" src="img/angular_bad_pract/thinking.gif" alt="calc">
+
+        <!--gif-->
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Lack of typing culture
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Lack of linting rules
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs typescript has-highlights">
+          function square(n: number): number {
+            return n * n;
+          }
+        </code></pre>
+
+        <div class="fragment fade-up">
+        <ul>
+          <li>Safety</li>
+          <li>Readability</li>
+          <li>Easier to write</li>
+        </ul>
+          <img class="fragment fade-up" src="img/angular_bad_pract/good-all.gif" alt="spiderman">
+        </div>
+      </section>
+
+<!--    </section>-->
+
+    <!--*1: Folder Structure-->
+<!--    <section>-->
+
+      <section>
+        <h1>#1</h1>
+      </section>
+
+      <section>
+        <p class="stretch">
+          <img src="img/angular_bad_pract/folders-types.png" alt="folders by types" class="plain">
+          <img class="fragment fade-up" src="img/angular_bad_pract/spiderman-wrong.gif" alt="spiderman">
+        </p>
+      </section>
+
+      <section>
+        <div class="vote-block">
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/palm.png" alt="palm">
+            Poor folder structure
+          </p>
+          <p>
+            <img class="vote-img" src="img/angular_bad_pract/fist.png" alt="fist">
+            Poor maintainability
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <p class="stretch">
+          <img src="img/angular_bad_pract/folders-features.png" alt="folders by features" class="plain">
+          <img class="fragment fade-up" width="200" src="img/angular_bad_pract/borat_nice.gif" alt="borat nice">
+        </p>
+      </section>
+
+<!--    </section>-->
 
     <section>
-      <h2>Voting</h2>
-      <p class="stretch">
-        <img class="plain" src="img/angular_bad_pract/voting.png" alt="voting">
-      </p>
+        <img src="img/angular_bad_pract/end.gif" alt="thanks" class="plain">
     </section>
-
-    <section>
-      <h2>Principles</h2>
-      <ul>
-        <li>
-          radical inclusion
-        </li>
-        <li>gifting</li>
-        <li>decommodification</li>
-        <li>radical self-reliance</li>
-        <li>radical self-expression</li>
-        <li>immediacy</li>
-        <li>...</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Who comes?</h2>
-      <ul>
-        <li> Dustin Moskovitz (co-founder of Asana and Facebook)</li>
-        <li>The Winklevoss twins</li>
-        <li>Katy Perry</li>
-        <li>Larry Page & Sergey Brin</li>
-        <li>Eric Schmidt </li>
-        <li>Elon Musk</li>
-        <li>Paris Hilton </li>
-        <li>Will Smith </li>
-        <li>Mark Zuckerberg </li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>How to get there?</h2>
-      <p class="stretch">
-        <img class="plain fragment fade-up" src="https://dataart.ua/media/2863976/image012.gif" alt="bm">
-      </p>
-    </section>
-
-    <section>
-      <h2>Regional Events</h2>
-      <ul>
-        <li>Precompression</li>
-        <li>Decompression</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Thank you</h2>
-    </section>
-
   </div>
 
 </div>
@@ -99,6 +683,7 @@
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
         transition: 'none',
+        controls: false,
         hash: true,
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
