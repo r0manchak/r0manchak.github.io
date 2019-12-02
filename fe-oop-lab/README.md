@@ -451,7 +451,7 @@ Reveal.initialize({
 		{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 
 		// Syntax highlight for <code> elements
-		{ src: 'plugin/highlight/highlight.js', async: true },
+		{ src: 'plugin/highlight/highlight_old.js', async: true },
 
 		// Zoom in and out with Alt+click
 		{ src: 'plugin/zoom-js/zoom.js', async: true },
@@ -919,13 +919,13 @@ Reveal.addEventListener( 'fragmenthidden', function( event ) {
 
 ### Code Syntax Highlighting
 
-By default, Reveal is configured with [highlight.js](https://highlightjs.org/) for code syntax highlighting. To enable syntax highlighting, you'll have to load the highlight plugin ([plugin/highlight/highlight.js](plugin/highlight/highlight.js)) and a highlight.js CSS theme (Reveal comes packaged with the Monokai themes: [lib/css/monokai.css](lib/css/monokai.css)).
+By default, Reveal is configured with [highlight_old.js](https://highlightjs.org/) for code syntax highlighting. To enable syntax highlighting, you'll have to load the highlight plugin ([plugin/highlight/highlight_old.js](plugin/highlight/highlight.js)) and a highlight_old.js CSS theme (Reveal comes packaged with the Monokai themes: [lib/css/monokai.css](lib/css/monokai.css)).
 
 ```javascript
 Reveal.initialize({
 	// More info https://github.com/hakimel/reveal.js#dependencies
 	dependencies: [
-		{ src: 'plugin/highlight/highlight.js', async: true },
+		{ src: 'plugin/highlight/highlight_old.js', async: true },
 	]
 });
 ```

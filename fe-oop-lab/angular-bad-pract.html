@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/theme/simple.css">
 
   <!-- Theme used for syntax highlighting of code -->
-  <link rel="stylesheet" href="lib/css/monokai.css">
+  <link rel="stylesheet" href="lib/css/vs.css">
 
   <link rel="stylesheet" href="css/angular-bad-pract.css">
 
@@ -252,11 +252,11 @@ if (isAdmin) {
       </section>
 
       <section>
-        <pre><code class="hljs plaintext data-trim ">
+        <pre><code class="hljs typescript data-trim">
 // template
-&lt;app-loader #loader>
-  &lt;button (click)="loadData()">Load data&lt;/button>
-&lt;/app-loader>
+<app-loader #loader>
+  <button (click)="loadData()">Load data</button>
+</app-loader>
 
 // code
 //...
@@ -286,19 +286,19 @@ public loadData() {
 
       <section>
         <pre><code class="hljs typescript data-trim has-highlights">
+// child component
+@Input() isLoading: boolean;
+
 // template
-&lt;app-loader [isLoading]="isLoaderShown">
-  &lt;button (click)="loadData()">Load data&lt;/button>
-&lt;/app-loader>
+<app-loader [isLoading]="isLoaderShown">
+  <button (click)="loadData()">Load data</button>
+</app-loader>
 
 // code
-//...
 public isLoaderShown: boolean = false;
 //...
 public loadData() {
   this.isLoaderShown = true;
-  //...
-}
         </code></pre>
 
         <img class="fragment fade-up" src="img/angular_bad_pract/spiderman_good.gif" alt="spiderman good">
@@ -502,14 +502,16 @@ this.books$ = http.get('/api/authors').pipe(
 
       <section>
         <pre><code class="hljs typescript has-highlights">
-    private config$: Config = this.http.get('/config').pipe(
+    private config$ = this.http.get('/config').pipe(
         shareReplay(1)
     );
 
+    private news$ = this.config$.pipe(
+        switchMap(config => this.http.get('/news'))
+    )
+
     public getNews() {
-        return this.config$.pipe(
-            switchMap(config => this.http.get('/news'))
-        )
+        return this.news$;
     }
         </code></pre>
 
@@ -528,8 +530,8 @@ this.books$ = http.get('/api/authors').pipe(
       <section>
                 <pre><code class="hljs typescript data-trim has-highlights">
 // template
-&lt;span class="user-name">{{user.name}} &lt;/span>
-&lt;img [src]="createUrl(user.avatar)" [alt]="user.name">
+<span class="user-name">{{user.name}} </span>
+<img [src]="createUrl(user.avatar)" [alt]="user.name">
 //...
 public createUrl(avatar) {
     return `img/${avatar}`;
@@ -563,8 +565,8 @@ changeDetection: ChangeDetectionStrategy.OnPush;
 
         <pre><code class="hljs typescript has-highlights">
 // template
-&lt;span class="user-name">{{user.name}}&lt;/span>
-&lt;img [src]="user.avatar | avatarUrl" [alt]="user.name">
+<span class="user-name">{{user.name}}</span>
+<img [src]="user.avatar | avatarUrl" [alt]="user.name">
 
 
 @Pipe({name: 'avatarUrl'})
@@ -669,6 +671,19 @@ export class RepeatPipe implements PipeTransform {
 <!--    </section>-->
 
     <section>
+      <h2>Further improvements</h2>
+      <ul>
+        <li>trackBy</li>
+        <li>API calls isolation</li>
+        <li>Subscriptions clean up</li>
+        <li>Lazy loading</li>
+        <li>Dumb reusable components</li>
+        <li>State management</li>
+        <li>Testing Practices</li>
+      </ul>
+    </section>
+
+    <section>
         <img src="img/angular_bad_pract/end.gif" alt="thanks" class="plain">
     </section>
   </div>
@@ -689,7 +704,7 @@ export class RepeatPipe implements PipeTransform {
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},
             {src: 'plugin/notes/notes.js', async: true},
-            {src: 'plugin/highlight/highlight.js', async: true}
+            {src: 'plugin/highlight/highlight.js', async: false}
         ],
     });
 
