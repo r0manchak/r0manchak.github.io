@@ -1,0 +1,340 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>JS Patterns</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/simple.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/vs.css">
+
+    <link rel="stylesheet" href="css/js-patterns.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <header class="mainheader">
+        <div class="logo">
+            <div class="divider"><img src="./img/js-patterns/EPAM_LOGO_WhiteAndBlue.png"></div>
+            <a href="#/"><span class="logotext">JS Patterns</span></a>
+        </div>
+    </header>
+</div>
+
+<div class="reveal">
+    <div class="slides">
+
+        <!--Intro-->
+        <!--    <section>-->
+
+        <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
+            <h1>JavaScript</h1>
+            <h2>Design Patterns</h2>
+        </section>
+
+        <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
+            <h2>What is Pattern</h2>
+            <p class="stretch">
+                <img class="plain" src="img/js-patterns/wiki-general.png" alt="blinds gif">
+            </p>
+
+            <aside class="notes">
+                Реугялрно повторювана сутність в житті, мистецтві чи абстрактних ідеях.
+                Геометричний паттерн - фігури.
+            </aside>
+        </section>
+
+        <section>
+            <h2>What is Software Design Pattern?</h2>
+            <ul>
+                <li class="fragment fade-up">
+                    Typical solution to commonly occurring problem in software design
+                </li>
+                <li class="fragment fade-up">
+                    Pre-made blueprints that you can customize and use in your code
+                </li>
+                <li class="fragment fade-up">
+                    Not a library or code snippet
+                </li>
+                <li class="fragment fade-up">
+                    Not an algorithm
+                </li>
+                <li class="fragment fade-up">
+                    Blueprint, not a recipe
+                </li>
+            </ul>
+
+            <aside class="notes">
+                Патерн проектування — це типовий спосіб вирішення певної проблеми, що часто зустрічається при проектуванні архітектури програм.
+                <br/>
+                На відміну від готових функцій чи бібліотек, патерн не можна просто взяти й скопіювати в програму. Патерн являє собою не якийсь конкретний код, а загальний принцип вирішення певної проблеми, який майже завжди треба підлаштовувати для потреб тієї чи іншої програми.
+                <br/>
+                Патерни часто плутають з алгоритмами, адже обидва поняття описують типові рішення відомих проблем. Але якщо алгоритм — це чіткий набір дій, то патерн — це високорівневий опис рішення, реалізація якого може відрізнятися у двох різних програмах.
+                <br/>
+                Якщо провести аналогії, то алгоритм — це кулінарний рецепт з чіткими кроками, а патерн — інженерне креслення, на якому намальовано рішення без конкретних кроків його отримання.
+            </aside>
+
+        </section>
+
+        <section>
+            <h2>What does Pattern consist of?</h2>
+            <ul>
+                <li class="fragment fade-up">
+                    <u>Intent</u> of the pattern briefly describes both the problem and the solution.
+                </li>
+                <li class="fragment fade-up">
+                    <u>Motivation</u> further explains the problem and the solution the pattern makes possible.
+                </li>
+                <li class="fragment fade-up">
+                    <u>Structure</u> of classes shows each part of the pattern and how they are related.
+                </li>
+                <li class="fragment fade-up">
+                    <u>Code example</u> makes it easier to grasp the idea behind the pattern.
+                </li>
+            </ul>
+
+            <aside class="notes">
+            </aside>
+        </section>
+
+        <section>
+            <h3>Who invented patterns?</h3>
+
+            <ul>
+                <li class="fragment fade-up">Patterns are discovered, not invented</li>
+                <li class="fragment fade-up">Repeated solution -> Detailed description -> Name</li>
+                <li class="fragment fade-up">1977 - Christopher Alexander. A Pattern Language: Towns, Buildings, Construction</li>
+                <li class="fragment fade-up">
+                    1994 - Design Patterns: Elements of Reusable Object-Oriented Software - <u>23 patterns</u>
+                </li>
+                <li class="fragment fade-up">The GoF book</li>
+            </ul>
+            
+            
+            <aside class="notes">
+                Шаблони проєктування: Елементи повторно використовуваного об'єктно-орієнтованого програмного забезпечення
+            </aside>
+        </section>
+
+        <section>
+            <h3>Why should I learn patterns?</h3>
+
+            <ul>
+                <li class="fragment fade-up">Verified and tested solutions</li>
+                <li class="fragment fade-up">Standardized code</li>
+                <li class="fragment fade-up">Common Developer Language</li>
+            </ul>
+
+            <aside class="notes">
+                Можна не знати. Скоріш за все реалізуєете якісь паттерни несвідомо
+                <br>
+                Перевірені рішення - велосипед
+                <br>
+                Стандартизація коду
+                <br>
+                Називаєте паттерн, а не пояснюєте архітектуру
+            </aside>
+        </section>
+
+        <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background" >
+            <h2>Patterns - the hard way</h2>
+            <p class="stretch">
+                <img class="plain" src="img/angular_bad_pract/blindssuck.gif" alt="blinds gif">
+            </p>
+        </section>
+
+        <section>
+            <h3>Pattern Types</h3>
+            <ul>
+                <li class="fragment fade-up">Creational</li>
+                <li class="fragment fade-up">Structural</li>
+                <li class="fragment fade-up">Behavioral</li>
+            </ul>
+
+            <aside class="notes">
+                <ul>
+                    <li>Породжуючі патерни піклуються про гнучке створення об’єктів без внесення в програму зайвих
+                        залежностей.
+                    </li>
+                    <li>
+                        Структурні патерни показують різні способи побудови зв’язків між об’єктами.
+                    </li>
+                    <li>
+                        Поведінкові патерни піклуються про ефективну комунікацію між об’єктами.
+                    </li>
+                </ul>
+            </aside>
+        </section>
+
+        <section>
+            <h2>Module Pattern</h2>
+
+        </section>
+
+        <section>
+            <section>
+                <h2>Singleton</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/singleton.png" alt="blinds gif">
+                </p>
+            </section>
+            <section>
+                <h2>Problem</h2>
+                <ul>
+                    <li class="fragment fade-up">Ensure that a class has just a single instance.</li>
+                    <li class="fragment fade-up">Provide a global access point to that instance.</li>
+                </ul>
+
+                <aside class="notes">
+                    <p><strong>Ensure that a class has just a single instance</strong>. Why would anyone want to control how many instances a class has? The most common reason for this is to control access to some shared resource—for example, a database or a file.</p>
+                    <p>Here’s how it works: imagine that you created an object, but after a while decided to create a new one. Instead of receiving a fresh object, you’ll get the one you already created.</p>
+
+                    <p><strong>Provide a global access point to that instance</strong>. Remember those global variables that you (all right, me) used to store some essential objects? While they’re very handy, they’re also very unsafe since any code can potentially overwrite the contents of those variables and crash the app.</p>
+                    <p>Just like a global variable, the Singleton pattern lets you access some object from anywhere in the program. However, it also protects that instance from being overwritten by other code.</p>
+                    <p>There’s another side to this problem: you don’t want the code that solves problem #1 to be scattered all over your program. It’s much better to have it within one class, especially if the rest of your code already depends on it.</p>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Real-world Example</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/government.jpg" alt="blinds gif">
+                </p>
+            </section>
+
+            <section>
+                <h2>Code</h2>
+                <pre><code class="hljs typescript data-trim has-highlights">
+const logger = (function () {
+    let loggerInstance;
+    function createInstance() {
+        const instance = new Object('Some logger config');
+        return instance;
+    }
+    return {
+        getInstance: function () {
+	        // creates instance if it doesn't exist
+	        if (!loggerInstance) {
+		        loggerInstance = createInstance();
+	        }
+            return loggerInstance;
+        }
+        businessLogic: function() {/* ... */}
+    };
+})();
+
+const logger1 = logger.getInstance();
+const logger2 = logger.getInstance();
+// Outputs: true
+console.log(user1 === user2);
+        </code></pre>
+            </section>
+
+            <section>
+                <h2>Pros and Cons</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <ul class="pros">
+                                <li>A class has only a single instance</li>
+                                <li>Global access point</li>
+                                <li>The singleton object is initialized only when it’s requested for the first time</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="cons">
+                                <li>Desire to expand functionality</li>
+                                <li>Difficulties with testing</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+
+        <section>
+            Pattern 3
+        </section>
+
+        <section>
+            Pattern 4
+        </section>
+
+        <section>
+            Pattern 5
+        </section>
+
+        <section>
+
+            <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
+import { CoreModule } from '../../../../core.module';
+import { FeatureModule } from '../../../../feature.module';
+import { MaterialModule } from '../../../../material.module';
+        </code></pre>
+
+            <img class="plain fragment fade-up" src="img/angular_bad_pract/asian-bad.gif" alt="asian bad">
+        </section>
+
+        <section>
+            <blockquote>
+                If all you have is a hammer, everything looks like a nail.
+            </blockquote>
+            <aside class="notes">
+                Поширена проблема новачків і не тільки. Як тільки вивчаєш якийсь паттерн, заразу здається, що він вам точно потрібний.
+            </aside>
+        </section>
+
+        <!--    </section>-->
+
+        <section>
+            <h2>Further reading</h2>
+            <ul>
+                <li>https://refactoring.guru/design-patterns</li>
+                <li>Дизайн-патерни — просто, як двері. Андрій Будай</li>
+            </ul>
+        </section>
+
+        <section>
+            <img src="img/angular_bad_pract/end.gif" alt="thanks" class="plain">
+        </section>
+    </div>
+
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        transition: 'none',
+        controls: false,
+        hash: true,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {src: 'plugin/highlight/highlight.js', async: false}
+        ],
+    });
+
+</script>
+</body>
+</html>

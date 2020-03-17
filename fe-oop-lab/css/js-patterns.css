@@ -1,0 +1,78 @@
+.wrapper .mainheader {
+    height: 52px;
+}
+.wrapper .logo {
+    background-color: #222222;
+    height: inherit;
+}
+.wrapper .divider {
+    border-right: 2px solid rgb(115, 115, 115);
+    padding: 0 20px 0 30px;
+    height: 14px;
+    float: left;
+    margin-top: 19px;
+}
+.wrapper .logo img {
+    height: 28px;
+    margin-top: -5px;
+}
+.wrapper .logo a {
+    text-decoration: none;
+}
+.wrapper .logo span {
+    padding-left: 15px;
+    color: rgb(255, 255, 255);
+    line-height: 52px;
+}
+.wrapper .content {
+    padding: 25px 44px;
+}
+
+body * {
+    font: 26px/1.6 'Source Sans Pro', sans-serif;
+    color: #222222;
+}
+
+.logotext {
+    font:  bold 14px 'Source Sans Pro', sans-serif;
+    text-transform: uppercase;
+}
+
+html.dim-background .slide-background {
+    opacity: 0.08 !important;
+}
+html.dim-background2 .slide-background {
+    opacity: 0.16 !important;
+}
+
+table tr td {
+    vertical-align: top;
+    width: 50%;
+}
+
+section ul li {
+    padding: 20px 0;
+}
+
+section ul.pros li, section ul.cons li {
+    padding: 10px 0;
+    list-style-type: none;
+}
+
+section ul.pros li::before {
+    content: '+';
+    color: green;
+    padding-right: 8px;
+    font-weight: bold
+}
+
+section ul.cons li::before {
+    content: '-';
+    color: red;
+    padding-right: 8px;
+    font-weight: bold
+}
+code, code * {
+    font-size: 13px;
+    font-family: monospace;
+}
