@@ -183,8 +183,135 @@
         </section>
 
         <section>
-            <h2>Module Pattern</h2>
+            <section>
+                <h2>Module Pattern</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/module.jpg" alt="blinds gif">
+                </p>
+            </section>
 
+            <section>
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <pre><code class="hljs typescript data-trim has-highlights">
+var message = "Hello";
+
+function showMessage() {
+    alert( message );
+}
+
+showMessage();
+                </code></pre>
+                        </td>
+                        <td class="fragment fade-right">
+                            <pre class="fragment fade-down"><code class="hljs typescript data-trim has-highlights">
+&lt;script&gt;
+    var message = &quot;Press the button&quot;;
+&lt;/script&gt;
+                            </code></pre>
+
+                            <pre class=""><code class="hljs typescript data-trim has-highlights">
+&lt;script src=&quot;hello.js&quot;&gt;&lt;/script&gt;
+                            </code></pre>
+                            <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
+&lt;button&gt;Button&lt;/button&gt;
+&lt;script&gt;
+    alert( message ); // "Press the button" is expected
+&lt;/script&gt;
+                </code></pre>
+                        </td>
+                    </tr>
+                </table>
+
+                <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
+                (function() {
+                    var message = "Hello";
+                    function showMessage() {
+                        alert( message );
+                    }
+
+                    showMessage();
+                }());
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Lodash, jQuery (and many others...)</h3>
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
+  ;(function() {
+  // lodash - main function
+  function lodash(value) {
+    // ...
+  }
+
+  // aux variable
+  var version = '2.4.1';
+
+  // encapsulated function code
+  function size(collection) {
+    return Object.keys(collection).length;
+  }
+
+  // define all the exported functions
+  lodash.size = size
+  // lodash.defaults = ...
+  // lodash.cloneDeep = ...
+
+  // export lodash outside
+  window._ = lodash;
+}());
+                </code></pre>
+                        </td>
+                        <td>
+                        <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
+var lodash = (function() {
+
+var version;
+function assignDefaults() { ... }
+
+return {
+    defaults: function() {  }
+}
+
+})();
+                </code></pre>
+                        </td>
+                    </tr>
+                </table>
+                <aside class="notes">
+                    <ul>
+                        <li>Code</li>
+                        <li>: in the beginning</li>
+                        <li></li>
+                    </ul>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Pros and Cons</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <ul class="pros">
+                                <li>Encapsulation & Private data</li>
+                                <li>Splits code into logical blocks</li>
+                                <li>Improves reusability</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="cons">
+                                <li>Can't test private data</li>
+                                <li>Manual handling of dependencies</li>
+                                <li>Outdated</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
         </section>
 
         <section>
