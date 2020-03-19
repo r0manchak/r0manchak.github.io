@@ -92,7 +92,7 @@
 
         </section>
 
-        <section>
+<!--        <section>
             <h2>What does Pattern consist of?</h2>
             <ul>
                 <li class="fragment fade-up">
@@ -111,7 +111,7 @@
 
             <aside class="notes">
             </aside>
-        </section>
+        </section>-->
 
         <section>
             <h3>Who invented patterns?</h3>
@@ -183,7 +183,7 @@
         </section>
 
         <section>
-            <section>
+            <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
                 <h2>Module Pattern</h2>
                 <p class="stretch">
                     <img class="plain" src="img/js-patterns/module.jpg" alt="blinds gif">
@@ -271,10 +271,10 @@ showMessage();
 var lodash = (function() {
 
 var version;
-function assignDefaults() { ... }
+function size() { ... }
 
 return {
-    defaults: function() {  }
+    size: function() { ... }
 }
 
 })();
@@ -315,11 +315,14 @@ return {
         </section>
 
         <section>
-            <section>
+            <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
                 <h2>Singleton</h2>
                 <p class="stretch">
                     <img class="plain" src="img/js-patterns/singleton.png" alt="blinds gif">
                 </p>
+                <aside class="notes">
+                    це породжувальний патерн проектування, який гарантує, що клас має лише один екземпляр, та надає глобальну точку доступу до нього.
+                </aside>
             </section>
             <section>
                 <h2>Problem</h2>
@@ -396,26 +399,332 @@ console.log(user1 === user2);
         </section>
 
         <section>
-            Pattern 3
+            <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
+                <h2>Composite</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/composite-2x.png" alt="blinds gif">
+                </p>
+                <aside class="notes">
+                    це структурний патерн проектування, що дає змогу згрупувати декілька об’єктів у деревоподібну структуру, а потім працювати з нею так, ніби це одиничний об’єкт.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Problem</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/composite-problem.png" alt="blinds gif">
+                </p>
+            </section>
+
+            <section>
+                <h2>Solution</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/composite-solution.png" alt="blinds gif">
+                </p>
+            </section>
+
+            <section>
+                <h2>Real world example</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/composite-exapmle.png" alt="blinds gif">
+                </p>
+            </section>
+
+            <section>
+                <pre><code class="hljs typescript data-trim has-highlights">
+abstract class Component {
+    protected parent: Component;
+
+    public setParent(parent: Component) {
+        this.parent = parent;
+    }
+
+    public getParent(): Component {
+        return this.parent;
+    }
+
+    // Child methods (empty in leafs)
+    public add(component: Component): void { }
+    public remove(component: Component): void { }
+
+    // Optional method to determine if a component can have children
+    public isComposite(): boolean {
+        return false;
+    }
+
+    public getPrice(): number {
+         //...
+    };
+}
+
+class Leaf extends Component {
+    constructor(private price: number) {}
+
+    public getPrice(): number {
+        return this.price;
+    }
+}
+
+class Composite extends Component {
+    protected children: Component[] = [];
+
+    public add(component: Component): void {
+        this.children.push(component);
+        component.setParent(this);
+    }
+
+    public remove(component: Component): void {
+        const componentIndex = this.children.indexOf(component);
+        this.children.splice(componentIndex, 1);
+
+        component.setParent(null);
+    }
+
+    public isComposite(): boolean {
+        return true;
+    }
+
+    public getPrice(): string {
+        const result: number = 0;
+        for (const child of this.children) {
+            results += child.getPrice();
+        }
+
+        return result;
+    }
+}
+
+const simple = new Leaf();
+console.log(simple.getPrice());
+
+const tree = new Composite();
+const branch1 = new Composite();
+branch1.add(new Leaf());
+branch1.add(new Leaf());
+const branch2 = new Composite();
+branch2.add(new Leaf());
+tree.add(branch1);
+tree.add(branch2);
+console.log(tree);
+                </code></pre>
+
+            </section>
+
+            <section>
+                <h2>Pros and Cons</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <ul class="pros">
+                                <li>Convenient work with complex tree structures</li>
+                                <li>Ability to easily introduce new components</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="cons">
+                                <li>Sometimes Component interfaces are overgeneralized</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
         </section>
 
         <section>
-            Pattern 4
+            <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
+                <h2>Facade</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/facade-2x.png" alt="blinds gif">
+                </p>
+            </section>
+
+            <section>
+                <h3>Problem</h3>
+                <table>
+                    <tr>
+                        <td>
+                            <p class="stretch">
+                                <img class="plain" src="img/js-patterns/facade-problem.jpg" alt="blinds gif">
+                            </p>
+                        </td>
+                        <td class="fragment fade-left">
+                            <p class="stretch">
+                                <img class="plain" src="img/js-patterns/facade_solution.jpg" alt="blinds gif">
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <section>
+                <h2>Real world example</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/facade-epxample.png" alt="blinds gif">
+                </p>
+            </section>
+
+            <section>
+                <pre><code class="hljs typescript data-trim has-highlights">
+class Facade {
+    protected subsystem1: Subsystem1;
+    protected subsystem2: Subsystem2;
+
+    constructor(subsystem1: Subsystem1 = null, subsystem2: Subsystem2 = null) {
+        this.subsystem1 = subsystem1 || new Subsystem1();
+        this.subsystem2 = subsystem2 || new Subsystem2();
+    }
+
+    public operation(): string {
+        result += this.subsystem1.operation1();
+        result += this.subsystem2.operation1();
+        // ...
+        result += this.subsystem1.operationN();
+        result += this.subsystem2.operationZ();
+
+        return result;
+    }
+}
+
+class Subsystem1 {
+    public operation1(): string {
+        return 'Subsystem1: Ready!\n';
+    }
+    // ...
+    public operationN(): string {
+        return 'Subsystem1: Go!\n';
+    }
+}
+
+class Subsystem2 {
+    public operation1(): string {
+        return 'Subsystem2: Get ready!\n';
+    }
+    // ...
+    public operationZ(): string {
+        return 'Subsystem2: Fire!';
+    }
+}
+
+const subsystem1 = new Subsystem1();
+const facade = new Facade(subsystem1);
+console.log(facade.operation());
+                </code></pre>
+
+            </section>
+
+            <section>
+                <h2>Pros and Cons</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <ul class="pros">
+                                <li>Isolates your code from complexity of a subsystem</li>
+                                <li>Prevents tight coupling with a subsystem</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="cons">
+                                <li>Can become <strong><u>a god object</u></strong> coupled to all classes of an app</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
         </section>
 
         <section>
-            Pattern 5
-        </section>
+            <section data-background="/img/js-patterns/pattern-bg.jpg" data-state="dim-background">
+                <h2>Strategy</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/strategy-2x.png" alt="blinds gif">
+                </p>
+                <aside class="notes">
+                    це поведінковий патерн проектування, який визначає сімейство схожих алгоритмів і розміщує кожен з них у власному класі. Після цього алгоритми можна заміняти один на інший прямо під час виконання програми.
+                </aside>
+            </section>
 
-        <section>
+            <section>
+                <h2>Problem</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/public-transport.jpg" alt="blinds gif">
+                </p>
+            </section>
 
-            <pre class="fragment fade-up"><code class="hljs typescript data-trim has-highlights">
-import { CoreModule } from '../../../../core.module';
-import { FeatureModule } from '../../../../feature.module';
-import { MaterialModule } from '../../../../material.module';
-        </code></pre>
+            <section>
+                <h2>Solution</h2>
+                <p class="stretch">
+                    <img class="plain" src="img/js-patterns/startegy-solution.png" alt="blinds gif">
+                </p>
+            </section>
 
-            <img class="plain fragment fade-up" src="img/angular_bad_pract/asian-bad.gif" alt="asian bad">
+            <section>
+                <pre><code class="hljs typescript data-trim has-highlights">
+class Context {
+    private strategy: Strategy;
+
+    constructor(strategy: Strategy) {
+        this.strategy = strategy;
+    }
+
+    public setStrategy(strategy: Strategy) {
+        this.strategy = strategy;
+    }
+
+    public doSomeBusinessLogic(): void {
+        // ...
+        console.log('Context: Sorting data using the strategy (not sure how it\'ll do it)');
+        const result = this.strategy.doAlgorithm(['a', 'b', 'c', 'd', 'e']);
+        console.log(result.join(','));
+        // ...
+    }
+}
+
+interface Strategy {
+    doAlgorithm(data: string[]): string[];
+}
+
+class ConcreteStrategyA implements Strategy {
+    public doAlgorithm(data: string[]): string[] {
+        return data.sort();
+    }
+}
+
+class ConcreteStrategyB implements Strategy {
+    public doAlgorithm(data: string[]): string[] {
+        return data.reverse();
+    }
+}
+// client code
+const context = new Context(new ConcreteStrategyA());
+context.doSomeBusinessLogic();
+
+context.setStrategy(new ConcreteStrategyB());
+context.doSomeBusinessLogic();
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Pros and Cons</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <ul class="pros">
+                                <li>Allows to swap algorithms used inside an object on the fly.</li>
+                                <li>Isolates the implementation details of an algorithm from the code that uses it.</li>
+                                <li>Allows to add new strategies without changes to the main class.</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="cons">
+                                <li>May be to complicated a simple app and be replaced with just functions that are passed to the main algorithm.</li>
+                                <li>Client must be aware of different strategies to select a proper one.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
         </section>
 
         <section>
@@ -438,6 +747,7 @@ import { MaterialModule } from '../../../../material.module';
         </section>
 
         <section>
+            <h2>Questions?</h2>
             <img src="img/angular_bad_pract/end.gif" alt="thanks" class="plain">
         </section>
     </div>

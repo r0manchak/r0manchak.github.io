@@ -6,15 +6,13 @@
     height: inherit;
 }
 .wrapper .divider {
-    border-right: 2px solid rgb(115, 115, 115);
     padding: 0 20px 0 30px;
-    height: 14px;
+    height: 29px;
     float: left;
-    margin-top: 19px;
+    margin-top: 12px;
 }
 .wrapper .logo img {
     height: 28px;
-    margin-top: -5px;
 }
 .wrapper .logo a {
     text-decoration: none;
@@ -23,6 +21,7 @@
     padding-left: 15px;
     color: rgb(255, 255, 255);
     line-height: 52px;
+    border-left: 2px solid rgb(115, 115, 115);
 }
 .wrapper .content {
     padding: 25px 44px;
@@ -75,4 +74,8 @@ section ul.cons li::before {
 code, code * {
     font-size: 13px;
     font-family: monospace;
+}
+
+.reveal pre code {
+    max-height: 580px;
 }
