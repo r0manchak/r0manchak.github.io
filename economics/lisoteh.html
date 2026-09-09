@@ -224,6 +224,35 @@ a.toc-link:hover {
   border-color: var(--accent);
   color: var(--accent-hover);
 }
+.toc-intro {
+  margin: -0.25rem 0 1rem;
+  color: var(--muted);
+}
+.block-label {
+  margin: 1.4rem 0 -0.45rem;
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.source-section {
+  margin-top: 2.8rem;
+  font-size: 1.45rem;
+}
+.source-section,
+.source-section + p,
+.source-marker {
+  display: none;
+}
+h2[data-block-title]::before {
+  content: attr(data-block-title);
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
 </style>
 </head>
 <body>
@@ -5097,12 +5126,12 @@ a.toc-link:hover {
 <p><strong>Практичні застереження:</strong> узгоджувати межі системи (щоб не «випустити» частину викидів у суміжний процес), фіксувати функціональну одиницю, документувати припущення, робити аналіз чутливості й публікувати діапазони, а не одну цифру.</p>
 <p><em>Висновок для іспиту: процесне моделювання відповідає на питання «як влаштовано і де втрати», імітаційне — «що буде далі за різних рішень». Для еколого-економічних систем потрібні обидва, бо саме затримки (ліс росте 80 років, ґрунт відновлюється століттями) роблять статичний аналіз хибним.</em></p>
 <h1 id="додаток-індекс-питання-програми-де-відповідь">Додаток. Індекс: питання програми → де відповідь<a class="back-to-toc" href="#зміст">↑ Зміст</a></h1>
-<p>Таблиця для швидкого пошуку: знаходите номер питання з екзаменаційного білета — бачите тему конспекту й формулювання, під яким подано відповідь.</p>
+<p>Таблиця для швидкого пошуку: знаходите номер питання з екзаменаційного білета — бачите навчальний блок і формулювання, під яким подано відповідь.</p>
 <table>
 <thead>
 <tr>
 <th>№ питання</th>
-<th>Тема</th>
+<th>Навчальний блок</th>
 <th>Формулювання у конспекті</th>
 </tr>
 </thead>
@@ -5938,6 +5967,94 @@ a.toc-link:hover {
 </div>
 <div id="top-toc-nav"><a href="#зміст">↑ Зміст</a></div>
 <script>
+/* Навігація для підготовки: офіційні номери питань збережено, старі 15 тем не є головною структурою. */
+document.addEventListener('DOMContentLoaded', function () {
+  var blocks = [
+    { id: 'основи-ринків', title: 'Основи економіки та ринки', sources: [1, 4] },
+    { id: 'інновації-цифра', title: 'Інновації, знання та цифрова економіка', sources: [2, 8, 9] },
+    { id: 'підприємство-ефективність', title: 'Підприємство, конкуренція та операційна ефективність', sources: [3, 11] },
+    { id: 'аналіз-бізнесу', title: 'Аналіз, розвиток і стійкість бізнесу', sources: [10] },
+    { id: 'макро-держава', title: 'Макроекономіка, фінанси та соціальна політика', sources: [5, 6] },
+    { id: 'світова-економіка', title: 'Світова економіка та міжнародні відносини', sources: [7] },
+    { id: 'екологічна-економіка', title: 'Екологічна економіка, сталий розвиток і природний капітал', sources: [12, 13] },
+    { id: 'клімат-менеджмент', title: 'Кліматична політика, екологічний менеджмент і лісове господарство', sources: [14, 15] }
+  ];
+
+  var sourceDetails = {};
+  document.querySelectorAll('details.toc-theme').forEach(function (detail) {
+    var match = detail.querySelector('summary').textContent.match(/Тема\s+(\d+)/);
+    if (match) sourceDetails[Number(match[1])] = detail;
+  });
+
+  var toc = document.querySelector('.toc-section');
+  if (toc) {
+    toc.innerHTML = '<h1 id="зміст">Навігація за навчальними блоками</h1>' +
+      '<p class="toc-intro">8 блоків для підготовки. Номер біля питання — номер з офіційної програми.</p>' +
+      '<div class="toc-controls"><button class="toc-expand-all" id="toc-expand-all-btn" type="button">Розгорнути всі блоки</button></div>';
+    blocks.forEach(function (block) {
+      var detail = document.createElement('details');
+      detail.className = 'toc-theme';
+      detail.id = 'блок-' + block.id;
+      var summary = document.createElement('summary');
+      summary.innerHTML = '<strong>' + block.title + '</strong>';
+      detail.appendChild(summary);
+      var list = document.createElement('ul');
+      block.sources.forEach(function (source) {
+        var original = sourceDetails[source];
+        if (!original) return;
+        original.querySelectorAll('li').forEach(function (item) {
+          list.appendChild(item.cloneNode(true));
+        });
+      });
+      detail.appendChild(list);
+      toc.appendChild(detail);
+    });
+  }
+
+  var sourceToBlock = {};
+  var blockById = {};
+  blocks.forEach(function (block) {
+    blockById[block.id] = block;
+    block.sources.forEach(function (source) { sourceToBlock[source] = block; });
+  });
+
+  document.querySelectorAll('td').forEach(function (cell) {
+    var match = cell.textContent.trim().match(/^Тема\s+(\d+)$/);
+    if (match && sourceToBlock[Number(match[1])]) {
+      cell.textContent = sourceToBlock[Number(match[1])].title;
+    }
+  });
+
+  document.querySelectorAll('h1').forEach(function (heading) {
+    var match = heading.textContent.match(/^Тема\s+(\d+)\.\s*/);
+    if (!match || !sourceToBlock[Number(match[1])]) return;
+    var source = Number(match[1]);
+    var block = sourceToBlock[source];
+    heading.classList.add('source-section');
+    heading.dataset.block = block.id;
+    if (heading.firstChild && heading.firstChild.nodeType === Node.TEXT_NODE) {
+      heading.firstChild.nodeValue = heading.firstChild.nodeValue.replace(/^Тема\s+\d+\.\s*/, '');
+    }
+    var marker = document.createElement('p');
+    marker.className = 'block-label source-marker';
+    marker.innerHTML = 'Навчальний блок: <a href="#блок-' + block.id + '">' + block.title + '</a>';
+    heading.parentNode.insertBefore(marker, heading);
+    var backLink = heading.querySelector('.back-to-toc');
+    if (backLink) backLink.href = '#блок-' + block.id;
+  });
+
+  var currentBlock;
+  document.querySelectorAll('h1, h2').forEach(function (heading) {
+    if (heading.tagName === 'H1' && heading.dataset.block) currentBlock = heading.dataset.block;
+    if (heading.tagName === 'H2' && currentBlock) {
+      heading.dataset.blockTitle = blockById[currentBlock].title;
+      var backLink = heading.querySelector('.back-to-toc');
+      if (backLink) backLink.href = '#блок-' + currentBlock;
+    }
+  });
+});
+</script>
+<script>
 (function () {
   function collapseAllExceptTarget(id) {
     document.querySelectorAll('details.toc-theme').forEach(function (d) {
@@ -5946,7 +6063,7 @@ a.toc-link:hover {
   }
   function applyTocHash() {
     var id = decodeURIComponent(location.hash.slice(1));
-    if (!id || id.indexOf('toc-') !== 0) return;
+    if (!id || (id.indexOf('toc-') !== 0 && id.indexOf('блок-') !== 0)) return;
     var target = document.getElementById(id);
     if (target && target.tagName === 'DETAILS') {
       collapseAllExceptTarget(id);
@@ -5971,7 +6088,7 @@ a.toc-link:hover {
       var themes = document.querySelectorAll('details.toc-theme');
       var allOpen = Array.prototype.every.call(themes, function (d) { return d.open; });
       themes.forEach(function (d) { d.open = !allOpen; });
-      btn.textContent = allOpen ? 'Розгорнути всі теми' : 'Згорнути всі теми';
+      btn.textContent = allOpen ? 'Розгорнути всі блоки' : 'Згорнути всі блоки';
     });
   });
 })();
