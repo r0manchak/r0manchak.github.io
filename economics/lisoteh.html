@@ -307,6 +307,54 @@ h2[data-block-title]::before {
 body.filter-mode .toc-controls {
   display: none;
 }
+.table-list {
+  margin: 1rem 0 1.35rem;
+}
+.table-list > ol,
+.table-list > ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+.table-list > ul {
+  padding-left: 0;
+  list-style: none;
+}
+.table-list-item {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--card);
+}
+.table-list-item > strong {
+  display: block;
+  margin-bottom: 0.45rem;
+}
+.table-list-fields {
+  display: grid;
+  grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
+  gap: 0.3rem 0.8rem;
+  margin: 0;
+}
+.table-list-fields dt {
+  font-weight: 700;
+}
+.table-list-fields dd {
+  margin: 0;
+}
+.question-index-list > li {
+  padding-left: 0.2rem;
+}
+@media (max-width: 640px) {
+  .table-list-fields {
+    grid-template-columns: 1fr;
+    gap: 0.12rem;
+  }
+  .table-list-fields dd {
+    margin-bottom: 0.45rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -6250,7 +6298,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var controls = addPanel();
   controls.innerHTML = '<p><strong>Режим edit.</strong> Позначте питання у змісті або біля відповіді. Посилання нижче оновлюється автоматично.</p>' +
     '<input id="filter-url" type="text" readonly aria-label="Адреса для режиму filter">' +
-    '<a id="open-filter" href="#">Відкрити filter</a>' +
+    '<a id="open-filter" href="#" target="_blank" rel="noopener">Відкрити filter</a>' +
     '<button id="copy-filter-url" type="button">Копіювати адресу</button>' +
     '<a href="' + window.location.pathname + '">Звичайний перегляд</a>';
 
@@ -6302,6 +6350,52 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
   sync();
+});
+</script><script>
+/* Перетворює табличні дані на картки-списки, зберігаючи назви полів. */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('table').forEach(function (table) {
+    var headers = Array.prototype.map.call(table.querySelectorAll('thead th'), function (cell, index) {
+      return cell.textContent.trim() || ('Параметр ' + (index + 1));
+    });
+    var rows = Array.prototype.slice.call(table.querySelectorAll('tbody tr'));
+    if (!headers.length || !rows.length) return;
+
+    var section = document.createElement('section');
+    section.className = 'table-list';
+    section.hidden = table.hidden;
+    var isQuestionIndex = headers[0] === '№ питання';
+    var list = document.createElement(isQuestionIndex ? 'ol' : 'ul');
+    if (isQuestionIndex) list.className = 'question-index-list';
+
+    rows.forEach(function (row) {
+      var cells = Array.prototype.slice.call(row.children);
+      if (!cells.length) return;
+      var item = document.createElement('li');
+      item.className = 'table-list-item';
+      var lead = document.createElement('strong');
+      var firstValue = cells[0].innerHTML.trim();
+      lead.innerHTML = isQuestionIndex ? 'Питання № ' + firstValue : headers[0] + ': ' + firstValue;
+      item.appendChild(lead);
+
+      if (cells.length > 1) {
+        var fields = document.createElement('dl');
+        fields.className = 'table-list-fields';
+        cells.slice(1).forEach(function (cell, index) {
+          var term = document.createElement('dt');
+          term.textContent = headers[index + 1] || ('Параметр ' + (index + 2));
+          var definition = document.createElement('dd');
+          definition.innerHTML = cell.innerHTML;
+          fields.appendChild(term);
+          fields.appendChild(definition);
+        });
+        item.appendChild(fields);
+      }
+      list.appendChild(item);
+    });
+    section.appendChild(list);
+    table.replaceWith(section);
+  });
 });
 </script></body>
 </html>
