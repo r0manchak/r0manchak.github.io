@@ -3905,5 +3905,150 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var params = new URLSearchParams(window.location.search);
+  var mode = params.has('filter') ? 'filter' : (params.has('edit') ? 'edit' : params.get('mode'));
+  var rawQuestions = params.get('questions') || params.get('filter') || '';
+  
+  var selected = new Set(rawQuestions.split(',').map(function(v) { return v.trim(); }).filter(function(v) { return v.length > 0; }));
+
+  if (mode !== 'filter' && mode !== 'edit') return;
+
+  function questionIds(node) {
+    if (node.tagName === 'LI') {
+      var link = node.querySelector('.toc-link');
+      return link ? [link.getAttribute('href').substring(1)] : [];
+    }
+    if (node.tagName === 'H2' && node.hasAttribute('id')) {
+      return [node.id];
+    }
+    return [];
+  }
+
+  function matchesSelection(ids) {
+    return ids.some(function (id) { return selected.has(id); });
+  }
+
+  function questionHeadings() {
+    return Array.prototype.filter.call(document.querySelectorAll('.source-section h2[id]'), function(heading) { return true; });
+  }
+
+  function addPanel() {
+    var panel = document.createElement('div');
+    panel.className = 'view-mode-panel';
+    panel.id = 'view-mode-panel';
+    var toc = document.querySelector('.toc-section');
+    toc.parentNode.insertBefore(panel, toc.nextSibling);
+    return panel;
+  }
+
+  function makeFilterUrl() {
+    var url = new URL(window.location.href);
+    url.search = '';
+    url.hash = '';
+    url.searchParams.set('filter', Array.from(selected).join(','));
+    return url.href;
+  }
+
+  if (mode === 'filter') {
+    document.body.classList.add('filter-mode');
+    var toc = document.querySelector('.toc-section');
+    var count = document.createElement('p');
+    count.className = 'filter-count';
+    count.textContent = 'Вибрано питань: ' + selected.size;
+    toc.parentNode.insertBefore(count, toc);
+
+    document.querySelectorAll('.toc-theme').forEach(function (block) {
+      var visible = 0;
+      block.querySelectorAll('li').forEach(function (item) {
+        var ids = questionIds(item);
+        var show = matchesSelection(ids);
+        item.hidden = !show;
+        if (show) visible += 1;
+      });
+      block.hidden = visible === 0;
+      block.open = visible > 0;
+    });
+
+    questionHeadings().forEach(function (heading) {
+      var ids = [heading.id];
+      var show = matchesSelection(ids);
+      heading.hidden = !show;
+      var node = heading.nextElementSibling;
+      while (node && node.tagName !== 'H1' && node.tagName !== 'H2') {
+        node.hidden = !show;
+        node = node.nextElementSibling;
+      }
+    });
+
+    if (selected.size === 0) {
+      var note = document.createElement('p');
+      note.className = 'empty-filter-note';
+      note.textContent = 'Не вибрано жодного питання. Перейдіть у режим edit і сформуйте набір.';
+      toc.parentNode.insertBefore(note, toc);
+    }
+    return;
+  }
+
+  document.body.classList.add('edit-mode');
+  var controls = addPanel();
+  controls.innerHTML = '<p><strong>Режим edit.</strong> Позначте питання у змісті або біля відповіді. Посилання нижче оновлюється автоматично.</p>' +
+    '<input id="filter-url" type="text" readonly aria-label="Адреса для режиму filter">' +
+    '<a id="open-filter" href="#" target="_blank" rel="noopener">Відкрити filter</a>' +
+    '<button id="copy-filter-url" type="button">Копіювати адресу</button>' +
+    '<a href="' + window.location.pathname + '">Звичайний перегляд</a>';
+
+  var controlsByKey = {};
+  function registerSelector(container, ids, className) {
+    if (!ids.length) return;
+    var label = document.createElement('label');
+    label.className = className;
+    var input = document.createElement('input');
+    input.type = 'checkbox';
+    input.dataset.questions = ids.join(',');
+    label.appendChild(input);
+    container.insertBefore(label, container.firstChild);
+    var groupKey = ids.join('|');
+    (controlsByKey[groupKey] || (controlsByKey[groupKey] = [])).push(input);
+    input.addEventListener('change', function () {
+      ids.forEach(function (id) {
+        if (input.checked) selected.add(id); else selected.delete(id);
+      });
+      sync();
+    });
+  }
+
+  document.querySelectorAll('.toc-theme li').forEach(function (item) {
+    registerSelector(item, questionIds(item), 'question-selector toc-question-selector');
+  });
+  questionHeadings().forEach(function (heading) {
+    registerSelector(heading, [heading.id], 'question-selector');
+  });
+
+  function sync() {
+    Object.keys(controlsByKey).forEach(function (groupKey) {
+      var ids = groupKey.split('|');
+      var checked = ids.every(function (id) { return selected.has(id); });
+      controlsByKey[groupKey].forEach(function (input) { input.checked = checked; });
+    });
+    var url = makeFilterUrl();
+    document.getElementById('filter-url').value = url;
+    document.getElementById('open-filter').href = url;
+  }
+
+  document.getElementById('copy-filter-url').addEventListener('click', function () {
+    var field = document.getElementById('filter-url');
+    field.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(field.value);
+    } else {
+      document.execCommand('copy');
+    }
+  });
+  sync();
+});
+</script>
+
 </body>
 </html>
